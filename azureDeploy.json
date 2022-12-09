@@ -1,0 +1,405 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "appName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the function app."
+            }
+        },
+        "storageAccountType": {
+            "type": "string",
+            "defaultValue": "Standard_LRS",
+            "allowedValues": [
+                "Standard_LRS",
+                "Standard_GRS",
+                "Standard_RAGRS",
+                "Standard_ZRS"
+            ],
+            "metadata": {
+                "description": "Storage Account type"
+            }
+        },
+        "storageAccountTLS": {
+            "type": "string",
+            "allowedValues": [
+                "TLS1_0",
+                "TLS1_1",
+                "TLS1_2"
+            ],
+            "metadata": {
+                "description": "Storage Account TLS version"
+            }
+        },
+        "eventHubConnectionString": {
+            "type": "string",
+            "metadata": {
+                "description": "Event Hub Namespace connection string"
+            }
+        },
+
+        "LogScaleHECURL": {
+            "type": "string",
+            "metadata": {
+                "description": "LogScale HEC URL"
+            }
+        },
+        "LogScaleIngestToken": {
+            "type": "string",
+            "metadata": {
+                "description": "LogScale Ingest Token"
+            }
+        },
+        "githubRepoURL": {
+            "type": "string",
+            "defaultValue": "https://github.com/daningu/humio-test.git"
+        },
+        "githubRepoBranch": {
+            "type": "string",
+            "defaultValue": "main"
+        },
+
+        "aadSignInLogHubName": {
+            "type": "string",
+            "defaultValue": "insights-logs-signinlogs",
+            "metadata": {
+                "description": "Event Hub name containing Azure Active Directory Sign-In logs"
+            }
+        },
+        "aadSigninLogEventHubConsumerGroup": {
+            "type": "string",
+            "defaultValue": "$Default",
+            "metadata": {
+                "description": "Consumer group for the Azure Active Directory Sign-In log Event Hub"
+            }
+        },
+        "aadSignInLogDisabled": {
+            "type": "bool",
+            "defaultValue": false
+        },
+
+        "aadAuditLogHubName": {
+            "type": "string",
+            "defaultValue": "insights-logs-auditlogs",
+            "metadata": {
+                "description": "Event Hub name containing Azure Active Directory Audit logs"
+            }
+        },
+        "aadAuditLogEventHubConsumerGroup": {
+            "type": "string",
+            "defaultValue": "$Default",
+            "metadata": {
+                "description": "Consumer group for the Azure Active Directory Audit log Event Hub"
+            }
+        },
+        "aadAuditLogDisabled": {
+            "type": "bool",
+            "defaultValue": false
+        },
+
+        "aadNoninteractiveLogHubName": {
+            "type": "string",
+            "defaultValue": "insights-logs-noninteractiveusersigninlogs",
+            "metadata": {
+                "description": "Event Hub name containing Azure Active Directory non-interactive logs"
+            }
+        },
+        "aadNoninteractiveLogEventHubConsumerGroup": {
+            "type": "string",
+            "defaultValue": "$Default",
+            "metadata": {
+                "description": "Consumer group for the Azure Active Directory non-interactive log Event Hub"
+            }
+        },
+        "aadNoninteractiveLogDisabled": {
+            "type": "bool",
+            "defaultValue": true
+        },
+
+        "aadServicePrincipalLogHubName": {
+            "type": "string",
+            "defaultValue": "insights-logs-serviceprincipalsigninlogs",
+            "metadata": {
+                "description": "Event Hub name containing Azure Active Directory Service Principal logs"
+            }
+        },
+        "aadServicePrincipalLogEventHubConsumerGroup": {
+            "type": "string",
+            "defaultValue": "$Default",
+            "metadata": {
+                "description": "Consumer group for the Azure Active Directory Service Principal log Event Hub"
+            }
+        },
+        "aadServicePrincipalLogDisabled": {
+            "type": "bool",
+            "defaultValue": true
+        },
+
+        "aadManagedIdentityLogDisabled": {
+            "type": "bool",
+            "defaultValue": true
+        },
+
+        "aadManagedIdentityLogHubName": {
+            "type": "string",
+            "defaultValue": "insights-logs-managedidentitysigninlogs",
+            "metadata": {
+                "description": "Event Hub name containing Azure Active Directory Managed Identity logs"
+            }
+        },
+        "aadManagedIdentityLogEventHubConsumerGroup": {
+            "type": "string",
+            "defaultValue": "$Default",
+            "metadata": {
+                "description": "Consumer group for the Azure Active Directory Managed Identity log Event Hub"
+            }
+        },
+
+        "Auxiliary1LogDisabled": {
+            "type": "bool",
+            "defaultValue": true
+        },
+
+        "Auxiliary1LogHubName": {
+            "type": "string",
+            "defaultValue": "auxiliary-1-log",
+            "metadata": {
+                "description": "Event Hub name containing logs (Auxiliary1)"
+            }
+        },
+        "Auxiliary1LogEventHubConsumerGroup": {
+            "type": "string",
+            "defaultValue": "$Default",
+            "metadata": {
+                "description": "Consumer group for the Auxiliary1 log Event Hub"
+            }
+        },
+
+        "Auxiliary2LogDisabled": {
+            "type": "bool",
+            "defaultValue": true
+        },
+
+        "Auxiliary2LogHubName": {
+            "type": "string",
+            "defaultValue": "auxiliary-2-log",
+            "metadata": {
+                "description": "Event Hub name containing logs (Auxiliary2)"
+            }
+        },
+        "Auxiliary2LogEventHubConsumerGroup": {
+            "type": "string",
+            "defaultValue": "$Default",
+            "metadata": {
+                "description": "Consumer group for the Auxiliary2 log Event Hub"
+            }
+        },
+
+        "tagsByResource": {
+            "type": "object",
+            "defaultValue": {}
+        }
+    },
+    "variables": {
+        "functionAppName": "[parameters('appName')]",
+        "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'functions')]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[variables('storageAccountName')]",
+            "apiVersion": "2019-06-01",
+            "location": "[resourceGroup().location]",
+            "tags": "[if(contains(parameters('tagsByResource'), 'Microsoft.Storage/storageAccounts'), parameters('tagsByResource')['Microsoft.Storage/storageAccounts'], json('{}'))]",
+            "kind": "Storage",
+            "sku": {
+                "name": "[parameters('storageAccountType')]"
+            },
+            "properties": {
+                "minimumTlsVersion": "[parameters('storageAccountTLS')]"
+            }
+        },
+        {
+            "apiVersion": "2015-05-01",
+            "name": "[variables('functionAppName')]",
+            "type": "Microsoft.Insights/components",
+            "kind": "web",
+            "location": "[resourceGroup().location]",
+            "tags": "[if(contains(parameters('tagsByResource'), 'Microsoft.Insights/components'), parameters('tagsByResource')['Microsoft.Insights/components'], json('{}'))]",
+            "properties": {
+                "Application_Type": "web"
+            }
+        },
+        {
+            "apiVersion": "2019-08-01",
+            "type": "Microsoft.Web/sites",
+            "name": "[variables('functionAppName')]",
+            "location": "[resourceGroup().location]",
+            "tags": "[if(contains(parameters('tagsByResource'), 'Microsoft.Web/sites'), parameters('tagsByResource')['Microsoft.Web/sites'], json('{}'))]",
+            "kind": "functionapp",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
+            ],
+            "properties": {
+                "siteConfig": {
+                    "appSettings": [
+                        {
+                            "name": "AzureWebJobsStorage",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';EndpointSuffix=', environment().suffixes.storage, ';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2019-06-01').keys[0].value)]"
+                        },
+                        {
+                            "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';EndpointSuffix=', environment().suffixes.storage, ';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2019-06-01').keys[0].value)]"
+                        },
+                        {
+                            "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+                            "value": "[reference(concat('microsoft.insights/components/', variables('functionAppName')), '2015-05-01').InstrumentationKey]"
+                        },
+                        {
+                            "name": "FUNCTIONS_WORKER_RUNTIME",
+                            "value": "python"
+                        },
+                        {
+                            "name": "FUNCTIONS_EXTENSION_VERSION",
+                            "value": "~4"
+                        },
+                        {
+                            "name": "WEBSITE_CONTENTSHARE",
+                            "value": "[toLower(variables('functionAppName'))]"
+                        },
+                        {
+                            "name": "EVENTHUB_CONNECTION_STRING",
+                            "value": "[parameters('eventHubConnectionString')]"
+                        },
+                        
+                        {
+                            "name": "LogScaleIngestToken",
+                            "value": "[parameters('LogScaleIngestToken')]"
+                        },
+                        {
+                            "name": "LogScaleURL",
+                            "value": "[parameters('LogScaleHECURL')]"
+                        },
+                        {
+                            "name": "aadSignInLogHubName",
+                            "value": "[parameters('aadSignInLogHubName')]"
+                        },
+                        {
+                            "name": "aadSignInLogEventHubConsumerGroup",
+                            "value": "[parameters('aadSignInLogEventHubConsumerGroup')]"
+                        },
+
+                        {
+                            "name": "AzureWebJobs.aadSignInLogDisabled",
+                            "value": "[parameters('aadSignInLogDisabled')]"
+                        },
+
+                        {
+                            "name": "aadAuditLogHubName",
+                            "value": "[parameters('aadAuditLogHubName')]"
+                        },
+                        {
+                            "name": "aadAuditLogEventHubConsumerGroup",
+                            "value": "[parameters('aadAuditLogEventHubConsumerGroup')]"
+                        },
+
+                        {
+                            "name": "AzureWebJobs.aadAuditLogDisabled",
+                            "value": "[parameters('aadAuditLogDisabled')]"
+                        },
+
+                        {
+                            "name": "aadNoninteractiveLogHubName",
+                            "value": "[parameters('aadNoninteractiveLogHubName')]"
+                        },
+                        {
+                            "name": "aadNoninteractiveLogEventHubConsumerGroup",
+                            "value": "[parameters('aadNoninteractiveLogEventHubConsumerGroup')]"
+                        },
+
+                        {
+                            "name": "AzureWebJobs.aadNoninteractiveLogDisabled",
+                            "value": "[parameters('aadNoninteractiveLogDisabled')]"
+                        },
+
+                        {
+                            "name": "aadServicePrincipalLogHubName",
+                            "value": "[parameters('aadServicePrincipalLogHubName')]"
+                        },
+                        {
+                            "name": "aadServicePrincipalLogEventHubConsumerGroup",
+                            "value": "[parameters('aadServicePrincipalLogEventHubConsumerGroup')]"
+                        },
+                        
+                        {
+                            "name": "AzureWebJobs.aadServicePrincipalLogDisabled",
+                            "value": "[parameters('aadServicePrincipalLogDisabled')]"
+                        },
+
+                        {
+                            "name": "aadManagedIdentityLogHubName",
+                            "value": "[parameters('aadManagedIdentityLogHubName')]"
+                        },
+                        {
+                            "name": "aadManagedIdentityLogEventHubConsumerGroup",
+                            "value": "[parameters('aadManagedIdentityLogEventHubConsumerGroup')]"
+                        },
+                        
+                        {
+                            "name": "AzureWebJobs.aadManagedIdentityLogDisabled",
+                            "value": "[parameters('aadManagedIdentityLogDisabled')]"
+                        },
+
+                        {
+                            "name": "Auxiliary1LogHubName",
+                            "value": "[parameters('Auxiliary1LogHubName')]"
+                        },
+                        {
+                            "name": "Auxiliary1LogEventHubConsumerGroup",
+                            "value": "[parameters('Auxiliary1LogEventHubConsumerGroup')]"
+                        },
+                        
+                        {
+                            "name": "AzureWebJobs.Auxiliary1LogDisabled",
+                            "value": "[parameters('Auxiliary1LogDisabled')]"
+                        },
+                        {
+                            "name": "Auxiliary2LogHubName",
+                            "value": "[parameters('Auxiliary2LogHubName')]"
+                        },
+                        {
+                            "name": "Auxiliary2LogEventHubConsumerGroup",
+                            "value": "[parameters('Auxiliary2LogEventHubConsumerGroup')]"
+                        },
+                        
+                        {
+                            "name": "AzureWebJobs.Auxiliary2LogDisabled",
+                            "value": "[parameters('Auxiliary2LogDisabled')]"
+                        },
+
+                        {
+                            "name": "BLOB_CONNECTION_STRING",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';EndpointSuffix=', environment().suffixes.storage, ';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2019-06-01').keys[0].value)]"
+                        }
+                    ]
+                }
+            },
+            "resources": [
+                {
+                    "apiVersion": "2016-08-01",
+                    "name": "web",
+                    "type": "sourcecontrols",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Web/Sites', variables('functionAppName'))]"
+                    ],
+                    "properties": {
+                        "RepoUrl": "[parameters('githubRepoURL')]",
+                        "branch": "[parameters('githubRepoBranch')]",
+                        "IsManualIntegration": true
+                    }
+                }
+            ] 
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "",
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "aadhorizontest_RootManageSharedAccessKey_EVENTHUB": "Endpoint=sb://aad-horizon-test.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=d7g9GtiJggTUInJ/L9PeyzJdVly0BmKFjf79EbQEVrs=;EntityPath=insights-logs-auditlogs",
+    "AzureWebJobs.aux2.Disabled": "false",
+    "AzureWebJobs.signinlogs.Disabled": "false",
+    "AzureWebJobs.serviceprincipalsigninlogs.Disabled": "false",
+    "AzureWebJobs.noninteractiveusersigninlogs.Disabled": "false",
+    "AzureWebJobs.auditlogs.Disabled": "false"
+  }
+}
