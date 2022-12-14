@@ -70,13 +70,22 @@
             },
             {
                 "name": "linuxFxVersion",
-                "label": "Storage Account Minimum TLS Version",
+                "label": "Linux Function Runtime Version",
                 "type": "Microsoft.Common.DropDown",
-                "toolTip": "Minimum TLS Version",
+                "toolTip": "Required for Linux app to represent runtime stack in the format of 'runtime|runtimeVersion'. For example: 'python|3.9'",
                 "constraints": {
                     "required": true,
-                    "defaultValue": "3.9",
-                    "required": true
+                    "defaultValue": "python|3.9",
+                    "required": true,
+                    "allowedValues": [
+                        {
+                            "label": "Python 3.9",
+                            "value": "python|3.9"
+                        }
+                        {
+                            "label": "Python 3.8",
+                            "value": "python|3.8"
+                        }
                 }
             }
         ],
