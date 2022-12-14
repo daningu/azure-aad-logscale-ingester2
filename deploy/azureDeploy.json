@@ -38,7 +38,13 @@
                 "description": "Event Hub Namespace connection string"
             }
         },
-
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+            "description": "Location for all resources."
+            }
+        },
         "linuxFxVersion": {
             "type": "string",
             "metadata": {
@@ -295,7 +301,10 @@
                             "name": "EVENTHUB_CONNECTION_STRING",
                             "value": "[parameters('eventHubConnectionString')]"
                         },
-                        
+                        {
+                            "name": "Location",
+                            "value": "[parameters('Location')]"
+                        }
                         {
                             "name": "LogScaleIngestToken",
                             "value": "[parameters('LogScaleIngestToken')]"
