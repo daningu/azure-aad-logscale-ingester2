@@ -77,16 +77,7 @@
                     "required": true,
                     "defaultValue": "python|3.9",
                     "required": true,
-                    "allowedValues": [
-                        {
-                            "label": "Python 3.9",
-                            "value": "python|3.9"
-                        },
-                        {
-                            "label": "Python 3.8",
-                            "value": "python|3.8"
-                        }
-                    ]
+                    
                 }
             }
         ],
