@@ -39,6 +39,12 @@
             }
         },
 
+        "linuxFxVersion": {
+            "type": "string",
+            "metadata": {
+                "description": "Required for Linux app to represent runtime stack in the format of 'runtime|runtimeVersion'. For example: 'python|3.9'"
+            }
+        },
         "LogScaleHECURL": {
             "type": "string",
             "metadata": {
@@ -209,7 +215,7 @@
         {
             "type": "Microsoft.Storage/storageAccounts",
             "name": "[variables('storageAccountName')]",
-            "apiVersion": "2019-06-01",
+            "apiVersion": "2021-02-01",
             "location": "[resourceGroup().location]",
             "tags": "[if(contains(parameters('tagsByResource'), 'Microsoft.Storage/storageAccounts'), parameters('tagsByResource')['Microsoft.Storage/storageAccounts'], json('{}'))]",
             "kind": "Storage",
@@ -221,7 +227,23 @@
             }
         },
         {
-            "apiVersion": "2015-05-01",
+            "type": "Microsoft.Web/serverfarms",
+            "apiVersion": "2021-02-01",
+            "name": "[variables('functionAppName')]",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "Y1",
+                "tier": "Dynamic",
+                "size": "Y1",
+                "family": "Y"
+            },
+            "properties": {
+                "computeMode": "Dynamic",
+                "reserved": true
+            }
+    },
+        {
+            "apiVersion": "2020-02-02",
             "name": "[variables('functionAppName')]",
             "type": "Microsoft.Insights/components",
             "kind": "web",
@@ -232,17 +254,19 @@
             }
         },
         {
-            "apiVersion": "2019-08-01",
             "type": "Microsoft.Web/sites",
+            "apiVersion": "2022-03-01",
+            "location": "[resourceGroup().location]",
+            "kind": "functionapp,linux",
             "name": "[variables('functionAppName')]",
             "location": "[resourceGroup().location]",
             "tags": "[if(contains(parameters('tagsByResource'), 'Microsoft.Web/sites'), parameters('tagsByResource')['Microsoft.Web/sites'], json('{}'))]",
-            "kind": "functionapp",
             "dependsOn": [
                 "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
             ],
             "properties": {
                 "siteConfig": {
+                    "linuxFxVersion": "[parameters('linuxFxVersion')]",
                     "appSettings": [
                         {
                             "name": "AzureWebJobsStorage",
