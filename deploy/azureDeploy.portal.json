@@ -85,7 +85,6 @@
                 "constraints": {
                     "required": true,
                     "defaultValue": "python|3.9",
-                    "required": true,
                     "allowedValues": [
                         {
                             "label": "Python 3.9",
