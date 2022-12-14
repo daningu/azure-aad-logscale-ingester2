@@ -69,6 +69,15 @@
                 }
             },
             {
+                "name": "location",
+                "label": "Region",
+                "type": "Microsoft.Common.DropDown",
+                "defaultValue": "[resourceGroup().location]",
+                "constraints": {
+                    "required": true
+                }
+            },
+            {
                 "name": "linuxFxVersion",
                 "label": "Linux Function Runtime Version",
                 "type": "Microsoft.Common.DropDown",
@@ -539,6 +548,7 @@
             "appName": "[steps('basics').appName]",
             "storageAccountType": "[steps('basics').storageAccountType]",
             "storageAccountTLS": "[steps('basics').storageAccountTLS]",
+            "location": "[steps('basics').location",
             "linuxFxVersion": "[steps('basics).linuxFxVersion",
 
             "eventHubConnectionString": "[steps('appSettings').ehPolicyKeyApi.primaryConnectionString]",
