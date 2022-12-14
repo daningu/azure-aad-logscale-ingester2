@@ -67,6 +67,17 @@
                         }
                     ]
                 }
+            },
+            {
+                "name": "linuxFxVersion",
+                "label": "Storage Account Minimum TLS Version",
+                "type": "Microsoft.Common.DropDown",
+                "toolTip": "Minimum TLS Version",
+                "constraints": {
+                    "required": true,
+                    "defaultValue": "3.9",
+                    "required": true
+                }
             }
         ],
         "steps": [
@@ -515,9 +526,10 @@
               }
         ],
         "outputs": {
+            "appName": "[steps('basics').appName]",
             "storageAccountType": "[steps('basics').storageAccountType]",
             "storageAccountTLS": "[steps('basics').storageAccountTLS]",
-            "appName": "[steps('basics').appName]",
+            "linuxFxVersion": "[steps('basics).linuxFxVersion",
 
             "eventHubConnectionString": "[steps('appSettings').ehPolicyKeyApi.primaryConnectionString]",
             "LogScaleHECURL": "[steps('appSettings').LogScaleSection.LogScaleHECURL]",
