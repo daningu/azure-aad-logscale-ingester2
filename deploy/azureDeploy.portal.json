@@ -452,7 +452,7 @@
                                 "label": "LogScale HEC URL",
                                 "toolTip": "Your LogScale HEC URL.",
                                 "type": "Microsoft.Common.TextBox",
-                                "defaultValue": "https://cloud.community.humio.com/api/v1/ingest/hec/raw",
+                                "defaultValue": "https://<YOUR LogScale URL>/api/v1/ingest/hec/raw",
                                 "constraints": {
                                     "required": true
                                 }
