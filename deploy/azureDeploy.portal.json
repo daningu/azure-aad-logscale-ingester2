@@ -74,7 +74,285 @@
                 "type": "Microsoft.Common.DropDown",
                 "defaultValue": "[resourceGroup().location]",
                 "constraints": {
-                    "required": true
+                    "required": true,
+                    "allowedValues": [
+                        {
+                            "label": "Asia",
+                            "value": "asia"
+                        },
+                        {
+                            "label": "Asia Pacific",
+                            "value": "asiapacific"
+                        },
+                        {
+                            "label": "Australia",
+                            "value": "australia"
+                        },
+                        {
+                            "label": "Australia Central",
+                            "value": "australiacentral"
+                        },
+                        {
+                            "label": "Australia Central 2",
+                            "value": "australiacentral2"
+                        },
+                        {
+                            "label": "Australia East",
+                            "value": "australiaeast"
+                        },
+                        {
+                            "label": "Australia Southeast",
+                            "value": "australiasoutheast"
+                        },
+                        {
+                            "label": "Brazil",
+                            "value": "brazil"
+                        },
+                        {
+                            "label": "Brazil South",
+                            "value": "brazilsouth"
+                        },
+                        {
+                            "label": "Brazil Southeast",
+                            "value": "brazilsoutheast"
+                        },
+                        {
+                            "label": "Canada",
+                            "value": "canada"
+                        },
+                        {
+                            "label": "Canada Central",
+                            "value": "canadacentral"
+                        },
+                        {
+                            "label": "Canada East",
+                            "value": "canadaeast"
+                        },
+                        {
+                            "label": "Central India",
+                            "value": "centralindia"
+                        },
+                        {
+                            "label": "Central US",
+                            "value": "centralus"
+                        },
+                        {
+                            "label": "Central US EUAP",
+                            "value": "centraluseuap"
+                        },
+                        {
+                            "label": "East Asia",
+                            "value": "eastasia"
+                        },
+                        {
+                            "label": "East US",
+                            "value": "eastus"
+                        },
+                        {
+                            "label": "East US 2",
+                            "value": "eastus2"
+                        },
+                        {
+                            "label": "East US 2 EUAP",
+                            "value": "eastus2euap"
+                        },
+                        {
+                            "label": "East US STG",
+                            "value": "eastusstg"
+                        },
+                        {
+                            "label": "Europe",
+                            "value": "europe"
+                        },
+                        {
+                            "label": "France",
+                            "value": "france"
+                        },
+                        {
+                            "label": "France Central",
+                            "value": "francecentral"
+                        },
+                        {
+                            "label": "France South",
+                            "value": "francesouth"
+                        },
+                        {
+                            "label": "Germany",
+                            "value": "germany"
+                        },
+                        {
+                            "label": "Germany North",
+                            "value": "germanynorth"
+                        },
+                        {
+                            "label": "Germany West Central",
+                            "value": "germanywestcentral"
+                        },
+                        {
+                            "label": "Global",
+                            "value": "global"
+                        },
+                        {
+                            "label": "India",
+                            "value": "india"
+                        },
+                        {
+                            "label": "Japan",
+                            "value": "japan"
+                        },
+                        {
+                            "label": "Japan East",
+                            "value": "japaneast"
+                        },
+                        {
+                            "label": "Japan West",
+                            "value": "japanwest"
+                        },
+                        {
+                            "label": "Jio India Central",
+                            "value": "jioindiacentral"
+                        },
+                        {
+                            "label": "Jio India West",
+                            "value": "jioindiawest"
+                        },
+                        {
+                            "label": "Korea",
+                            "value": "korea"
+                        },
+                        {
+                            "label": "Korea Central",
+                            "value": "koreacentral"
+                        },
+                        {
+                            "label": "Korea South",
+                            "value": "koreasouth"
+                        },
+                        {
+                            "label": "North Central US",
+                            "value": "northcentralus"
+                        },
+                        {
+                            "label": "North Europe",
+                            "value": "northeurope"
+                        },
+                        {
+                            "label": "Norway",
+                            "value": "norway"
+                        },
+                        {
+                            "label": "Norway East",
+                            "value": "norwayeast"
+                        },
+                        {
+                            "label": "Norway West",
+                            "value": "norwaywest"
+                        },
+                        {
+                            "label": "Qatar Central",
+                            "value": "qatarcentral"
+                        },
+                        {
+                            "label": "Singapore",
+                            "value": "singapore"
+                        },
+                        {
+                            "label": "South Africa",
+                            "value": "southafrica"
+                        },
+                        {
+                            "label": "South Africa North",
+                            "value": "southafricanorth"
+                        },
+                        {
+                            "label": "South Africa West",
+                            "value": "southafricawest"
+                        },
+                        {
+                            "label": "South Central US",
+                            "value": "southcentralus"
+                        },
+                        {
+                            "label": "Southeast Asia",
+                            "value": "southeastasia"
+                        },
+                        {
+                            "label": "South India",
+                            "value": "southindia"
+                        },
+                        {
+                            "label": "Sweden Central",
+                            "value": "swedencentral"
+                        },
+                        {
+                            "label": "Switzerland",
+                            "value": "switzerland"
+                        },
+                        {
+                            "label": "Switzerland North",
+                            "value": "switzerlandnorth"
+                        },
+                        {
+                            "label": "Switzerland West",
+                            "value": "switzerlandwest"
+                        },
+                        {
+                            "label": "United Arab Emirates",
+                            "value": "uae"
+                        },
+                        {
+                            "label": "UAE Central",
+                            "value": "uaecentral"
+                        },
+                        {
+                            "label": "UAE North",
+                            "value": "uaenorth"
+                        },
+                        {
+                            "label": "United Kingdom",
+                            "value": "uk"
+                        },
+                        {
+                            "label": "UK South",
+                            "value": "uksouth"
+                        },
+                        {
+                            "label": "UK West",
+                            "value": "ukwest"
+                        },
+                        {
+                            "label": "United States",
+                            "value": "unitedstates"
+                        },
+                        {
+                            "label": "United States EUAP",
+                            "value": "unitedstateseuap"
+                        },
+                        {
+                            "label": "West Central US",
+                            "value": "westcentralus"
+                        },
+                        {
+                            "label": "West Europe",
+                            "value": "westeurope"
+                        },
+                        {
+                            "label": "West India",
+                            "value": "westindia"
+                        },
+                        {
+                            "label": "West US",
+                            "value": "westus"
+                        },
+                        {
+                            "label": "West US 2",
+                            "value": "westus2"
+                        },
+                        {
+                            "label": "West US 3",
+                            "value": "westus3"
+                        }
+                    ]
                 }
             },
             {
