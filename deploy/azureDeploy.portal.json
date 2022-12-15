@@ -452,7 +452,8 @@
                                 "label": "LogScale HEC URL",
                                 "toolTip": "Your LogScale HEC URL.",
                                 "type": "Microsoft.Common.TextBox",
-                                "defaultValue": "https://<YOUR LogScale URL>/api/v1/ingest/hec/raw",
+                                "defaultValue": "https://cloud.community.humio.com/api/v1/ingest/hec/raw",
+                                //"defaultValue": "https://<YOUR LogScale URL>/api/v1/ingest/hec/raw",
                                 "constraints": {
                                     "required": true
                                 }
@@ -481,7 +482,7 @@
                                 "label": "Repository URL",
                                 "toolTip": "URL to the Github Repository containing the function code.",
                                 "type": "Microsoft.Common.TextBox",
-                                "defaultValue": "https://github.com/daningu/humio-test.git",
+                                "defaultValue": "https://github.com/daningu/azure-aad-logscale-ingester.git",
                                 "constraints": {
                                     "required": true
                                 }
@@ -825,8 +826,8 @@
             "appName": "[steps('basics').appName]",
             "storageAccountType": "[steps('basics').storageAccountType]",
             "storageAccountTLS": "[steps('basics').storageAccountTLS]",
-            "location": "[steps('basics').location",
-            "linuxFxVersion": "[steps('basics).linuxFxVersion",
+            "location": "[steps('basics').location]",
+            "linuxFxVersion": "[steps('basics).linuxFxVersion]",
 
             "eventHubConnectionString": "[steps('appSettings').ehPolicyKeyApi.primaryConnectionString]",
             "LogScaleHECURL": "[steps('appSettings').LogScaleSection.LogScaleHECURL]",
