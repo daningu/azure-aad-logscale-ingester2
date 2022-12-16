@@ -69,8 +69,8 @@
                 }
             },
             {
-                "name": "location",
-                "label": "Region",
+                "name": "functionLocation",
+                "label": "Region of Function",
                 "type": "Microsoft.Common.DropDown",
                 "defaultValue": "[resourceGroup().location]",
                 "constraints": {
@@ -481,7 +481,7 @@
                                 "label": "Repository URL",
                                 "toolTip": "URL to the Github Repository containing the function code.",
                                 "type": "Microsoft.Common.TextBox",
-                                "defaultValue": "https://github.com/daningu/humio-test.git",
+                                "defaultValue": "https://github.com/daningu/azure-aad-logscale-ingester.git",
                                 "constraints": {
                                     "required": true
                                 }
@@ -825,8 +825,8 @@
             "appName": "[steps('basics').appName]",
             "storageAccountType": "[steps('basics').storageAccountType]",
             "storageAccountTLS": "[steps('basics').storageAccountTLS]",
-            "location": "[steps('basics').location",
-            "linuxFxVersion": "[steps('basics).linuxFxVersion",
+            "location": "[steps('basics').functionLocation]",
+            "linuxFxVersion": "[steps('basics).linuxFxVersion]",
 
             "eventHubConnectionString": "[steps('appSettings').ehPolicyKeyApi.primaryConnectionString]",
             "LogScaleHECURL": "[steps('appSettings').LogScaleSection.LogScaleHECURL]",
