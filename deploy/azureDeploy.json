@@ -38,13 +38,7 @@
                 "description": "Event Hub Namespace connection string"
             }
         },
-        "functionLocation": {
-            "type": "string",
-            "defaultValue": "[parameters('functionLocation')]",
-            "metadata": {
-                "description": "functionLocation for all resources."
-            }
-        },
+
         "linuxFxVersion": {
             "type": "string",
             "metadata": {
@@ -222,7 +216,7 @@
             "type": "Microsoft.Storage/storageAccounts",
             "name": "[variables('storageAccountName')]",
             "apiVersion": "2021-02-01",
-            "location": "[parameters('functionLocation')]",
+            "location": "[resourceGroup().location]",
             "tags": "[if(contains(parameters('tagsByResource'), 'Microsoft.Storage/storageAccounts'), parameters('tagsByResource')['Microsoft.Storage/storageAccounts'], json('{}'))]",
             "kind": "Storage",
             "sku": {
@@ -234,9 +228,9 @@
         },
         {
             "type": "Microsoft.Web/serverfarms",
-            "apiVersion": "2022-03-01",
+            "apiVersion": "2021-02-01",
             "name": "[variables('functionAppName')]",
-            "location": "[parameters('functionLocation')]",
+            "location": "[resourceGroup().location]",
             "sku": {
                 "name": "Y1",
                 "tier": "Dynamic",
@@ -244,6 +238,7 @@
                 "family": "Y"
             },
             "properties": {
+                "computeMode": "Dynamic",
                 "reserved": true
             }
     },
@@ -252,7 +247,7 @@
             "name": "[variables('functionAppName')]",
             "type": "Microsoft.Insights/components",
             "kind": "web",
-            "location": "[parameters('functionLocation')]",
+            "location": "[resourceGroup().location]",
             "tags": "[if(contains(parameters('tagsByResource'), 'Microsoft.Insights/components'), parameters('tagsByResource')['Microsoft.Insights/components'], json('{}'))]",
             "properties": {
                 "Application_Type": "web"
@@ -261,10 +256,10 @@
         {
             "type": "Microsoft.Web/sites",
             "apiVersion": "2022-03-01",
-            "location": "[parameters('functionLocation')]",
+            "location": "[resourceGroup().location]",
             "kind": "functionapp,linux",
             "name": "[variables('functionAppName')]",
-            "location": "[parameters('functionLocation')]",
+            "location": "[resourceGroup().location]",
             "tags": "[if(contains(parameters('tagsByResource'), 'Microsoft.Web/sites'), parameters('tagsByResource')['Microsoft.Web/sites'], json('{}'))]",
             "dependsOn": [
                 "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
@@ -301,10 +296,7 @@
                             "name": "EVENTHUB_CONNECTION_STRING",
                             "value": "[parameters('eventHubConnectionString')]"
                         },
-                        {
-                            "name": "FunctionLocation",
-                            "value": "[parameters('functionLocation')]"
-                        },
+                        
                         {
                             "name": "LogScaleIngestToken",
                             "value": "[parameters('LogScaleIngestToken')]"
