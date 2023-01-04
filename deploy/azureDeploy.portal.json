@@ -19,56 +19,6 @@
                 }
             },
             {
-                "name": "storageAccountType",
-                "label": "Storage Account Type",
-                "type": "Microsoft.Common.DropDown",
-                "toolTip": "The storage account will contain a blob container for undeliverable events.",
-                "constraints": {
-                    "required": true,
-                    "allowedValues": [
-                        {
-                            "label": "Standard Locally Redundant Storage",
-                            "value": "Standard_LRS"
-                        },
-                        {
-                            "label": "Standard Geo Replicated Storage",
-                            "value": "Standard_GRS"
-                        },
-                        {
-                            "label": "Standard Read-Access Geo Replicated Storage",
-                            "value": "Standard_RAGRS"
-                        },
-                        {
-                            "label": "Standard Zone Redundant Storage",
-                            "value": "Standard_ZRS"
-                        }
-                    ]
-                }
-            },
-            {
-                "name": "storageAccountTLS",
-                "label": "Storage Account Minimum TLS Version",
-                "type": "Microsoft.Common.DropDown",
-                "toolTip": "Minimum TLS Version",
-                "constraints": {
-                    "required": true,
-                    "allowedValues": [
-                        {
-                            "label": "TLS 1.0",
-                            "value": "TLS1_0"
-                        },
-                        {
-                            "label": "TLS 1.1",
-                            "value": "TLS1_1"
-                        },
-                        {
-                            "label": "TLS 1.2",
-                            "value": "TLS1_2"
-                        }
-                    ]
-                }
-            },
-            {
                 "name": "linuxFxVersion",
                 "label": "Linux Function Runtime Version",
                 "type": "Microsoft.Common.DropDown",
@@ -527,7 +477,6 @@
                     "name": "tagsByResource",
                     "type": "Microsoft.Common.TagsByResource",
                     "resources": [
-                      "Microsoft.Storage/storageAccounts",
                       "Microsoft.Insights/components",
                       "Microsoft.Web/sites"
                     ]
@@ -537,8 +486,6 @@
         ],
         "outputs": {
             "appName": "[steps('basics').appName]",
-            "storageAccountType": "[steps('basics').storageAccountType]",
-            "storageAccountTLS": "[steps('basics').storageAccountTLS]",
             "linuxFxVersion": "[steps('basics).linuxFxVersion",
 
             "eventHubConnectionString": "[steps('appSettings').ehPolicyKeyApi.primaryConnectionString]",
