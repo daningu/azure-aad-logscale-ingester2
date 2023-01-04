@@ -21,12 +21,21 @@
             {
                 "name": "linuxFxVersion",
                 "label": "Linux Function Runtime Version",
-                "type": "Microsoft.Common.TextBox",
+                "type": "Microsoft.Common.DropDown",
                 "toolTip": "Required for Linux app to represent runtime stack in the format of 'runtime|runtimeVersion'. For example: 'python|3.9'",
                 "constraints": {
                     "required": true,
                     "defaultValue": "python|3.9",
-                    "required": true
+                    "allowedValues": [
+                        {
+                            "label": "Python 3.9",
+                            "value": "python|3.9"
+                        },
+                        {
+                            "label": "Python 3.8",
+                            "value": "python|3.8"
+                        }
+                    ]
                 }
             }
         ],
