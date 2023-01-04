@@ -226,7 +226,7 @@
             "properties": {
                 "siteConfig": {
                     "reserved": true,
-                    "linuxFxVersion": "python|3.9",
+                    "linuxFxVersion": "PYTHON|3.9",
                     "appSettings": [
                         {
                             "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
