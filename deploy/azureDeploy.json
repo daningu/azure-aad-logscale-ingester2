@@ -225,6 +225,7 @@
             "tags": "[if(contains(parameters('tagsByResource'), 'Microsoft.Web/sites'), parameters('tagsByResource')['Microsoft.Web/sites'], json('{}'))]",
             "properties": {
                 "siteConfig": {
+                    "reserved": true,
                     "linuxFxVersion": "[parameters('linuxFxVersion')]",
                     "appSettings": [
                         {
