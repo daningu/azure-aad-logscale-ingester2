@@ -216,7 +216,7 @@
             "type": "Microsoft.Storage/storageAccounts",
             "name": "[variables('storageAccountName')]",
             "apiVersion": "2021-02-01",
-            "location": "[resourceGroup().location]",
+            "location": "centralus",
             "tags": "[if(contains(parameters('tagsByResource'), 'Microsoft.Storage/storageAccounts'), parameters('tagsByResource')['Microsoft.Storage/storageAccounts'], json('{}'))]",
             "kind": "Storage",
             "sku": {
@@ -230,7 +230,7 @@
             "type": "Microsoft.Web/serverfarms",
             "apiVersion": "2021-02-01",
             "name": "[variables('functionAppName')]",
-            "location": "[resourceGroup().location]",
+            "location": "centralus",
             "sku": {
                 "name": "Y1",
                 "tier": "Dynamic",
@@ -247,7 +247,7 @@
             "name": "[variables('functionAppName')]",
             "type": "Microsoft.Insights/components",
             "kind": "web",
-            "location": "[resourceGroup().location]",
+            "location": "centralus",
             "tags": "[if(contains(parameters('tagsByResource'), 'Microsoft.Insights/components'), parameters('tagsByResource')['Microsoft.Insights/components'], json('{}'))]",
             "properties": {
                 "Application_Type": "web"
@@ -256,10 +256,10 @@
         {
             "type": "Microsoft.Web/sites",
             "apiVersion": "2022-03-01",
-            "location": "[resourceGroup().location]",
+            "location": "centralus",
             "kind": "functionapp,linux",
             "name": "[variables('functionAppName')]",
-            "location": "[resourceGroup().location]",
+            "location": "centralus",
             "tags": "[if(contains(parameters('tagsByResource'), 'Microsoft.Web/sites'), parameters('tagsByResource')['Microsoft.Web/sites'], json('{}'))]",
             "dependsOn": [
                 "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
