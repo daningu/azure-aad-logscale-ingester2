@@ -184,12 +184,12 @@
         }
     },
     "variables": {
-        "functionAppName": "[parameters('appName')]",
+        "functionAppName": "[parameters('appName')]"
     },
     "resources": [
         {
             "type": "Microsoft.Web/serverfarms",
-            "apiVersion": "2021-02-01",
+            "apiVersion": "2022-03-01",
             "name": "[variables('functionAppName')]",
             "location": "centralus",
             "sku": {
@@ -220,10 +220,7 @@
             "location": "centralus",
             "kind": "functionapp,linux",
             "name": "[variables('functionAppName')]",
-            "location": "centralus",
             "tags": "[if(contains(parameters('tagsByResource'), 'Microsoft.Web/sites'), parameters('tagsByResource')['Microsoft.Web/sites'], json('{}'))]",
-
-            ],
             "properties": {
                 "siteConfig": {
                     "linuxFxVersion": "[parameters('linuxFxVersion')]",
