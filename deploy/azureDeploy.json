@@ -354,6 +354,9 @@
                     ]
                 }
             },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', variables('functionAppName'))]",
+            ],
             "resources": [
                 {
                     "apiVersion": "2016-08-01",
