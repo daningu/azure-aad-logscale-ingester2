@@ -217,9 +217,9 @@
             "name": "[variables('functionAppName')]",
             "tags": "[if(contains(parameters('tagsByResource'), 'Microsoft.Web/sites'), parameters('tagsByResource')['Microsoft.Web/sites'], json('{}'))]",
             "properties": {
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('functionAppName'))]",
                 "siteConfig": {
                     "reserved": true,
-                    "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('functionAppName'))]",
                     "linuxFxVersion": "Python|3.9",
                     "appSettings": [
                         {
