@@ -186,7 +186,7 @@
             "type": "Microsoft.Web/serverfarms",
             "apiVersion": "2022-03-01",
             "name": "[variables('functionAppName')]",
-            "location": "Central US",
+            "location": "centralus",
             "sku": {
                 "name": "Y1",
                 "tier": "Dynamic",
@@ -203,7 +203,7 @@
             "name": "[variables('functionAppName')]",
             "type": "Microsoft.Insights/components",
             "kind": "web",
-            "location": "Central US",
+            "location": "centralus",
             "tags": "[if(contains(parameters('tagsByResource'), 'Microsoft.Insights/components'), parameters('tagsByResource')['Microsoft.Insights/components'], json('{}'))]",
             "properties": {
                 "Application_Type": "web"
@@ -212,7 +212,7 @@
         {
             "type": "Microsoft.Web/sites",
             "apiVersion": "2022-03-01",
-            "location": "Central US",
+            "location": "centralus",
             "kind": "functionapp,linux",
             "name": "[variables('functionAppName')]",
             "tags": "[if(contains(parameters('tagsByResource'), 'Microsoft.Web/sites'), parameters('tagsByResource')['Microsoft.Web/sites'], json('{}'))]",
