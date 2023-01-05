@@ -220,7 +220,7 @@
                 "siteConfig": {
                     "reserved": true,
                     "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('functionAppName'))]",
-                    "linuxFxVersion": "PYTHON|3.9",
+                    "linuxFxVersion": "Python|3.9",
                     "appSettings": [
                         {
                             "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
