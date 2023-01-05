@@ -216,7 +216,6 @@
             "kind": "functionapp,linux",
             "name": "[variables('functionAppName')]",
             "tags": "[if(contains(parameters('tagsByResource'), 'Microsoft.Web/sites'), parameters('tagsByResource')['Microsoft.Web/sites'], json('{}'))]",
-            "dependsOn": "[resourceId('Microsoft.Web/serverfarms', variables('functionAppName'))]",
             "properties": {
                 "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('functionAppName'))]",
                 "siteConfig": {
