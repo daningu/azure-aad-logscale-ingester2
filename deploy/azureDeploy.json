@@ -177,6 +177,7 @@
         }
     },
     "variables": {
+        "hostingPlanName": "[parameters('functionAppName')]",
         "functionAppName": "[parameters('appName')]",
         "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'functions')]"
 
@@ -360,6 +361,7 @@
                     "name": "web",
                     "type": "sourcecontrols",
                     "dependsOn": [
+                        "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
                         "[resourceId('Microsoft.Web/Sites', variables('functionAppName'))]"
                     ],
                     "properties": {
