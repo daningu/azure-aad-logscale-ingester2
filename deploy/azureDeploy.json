@@ -185,8 +185,8 @@
         {
             "type": "Microsoft.Web/serverfarms",
             "apiVersion": "2022-03-01",
-            "name": "[variables('functionAppName')]",
-            "location": "centralus",
+            "name": "[variables('hostingPlanName')]",
+            "location": "Central US",
             "sku": {
                 "name": "Y1",
                 "tier": "Dynamic",
@@ -203,7 +203,7 @@
             "name": "[variables('functionAppName')]",
             "type": "Microsoft.Insights/components",
             "kind": "web",
-            "location": "centralus",
+            "location": "Central US",
             "tags": "[if(contains(parameters('tagsByResource'), 'Microsoft.Insights/components'), parameters('tagsByResource')['Microsoft.Insights/components'], json('{}'))]",
             "properties": {
                 "Application_Type": "web"
@@ -212,13 +212,14 @@
         {
             "type": "Microsoft.Web/sites",
             "apiVersion": "2022-03-01",
-            "location": "centralus",
+            "location": "Central US",
             "kind": "functionapp,linux",
             "name": "[variables('functionAppName')]",
             "tags": "[if(contains(parameters('tagsByResource'), 'Microsoft.Web/sites'), parameters('tagsByResource')['Microsoft.Web/sites'], json('{}'))]",
             "properties": {
                 "siteConfig": {
                     "reserved": true,
+                    "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
                     "linuxFxVersion": "PYTHON|3.9",
                     "appSettings": [
                         {
