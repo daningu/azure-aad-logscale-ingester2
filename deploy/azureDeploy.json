@@ -192,10 +192,12 @@
             "properties": {
                 "RepoUrl": "[parameters('githubRepoURL')]",
                 "branch": "[parameters('githubRepoBranch')]",
-               "IsManualIntegration": true
+                "IsManualIntegration": true
             }
-        },
-       {
+        }
+    ],
+        "resources": [
+        {
             "type": "Microsoft.Storage/storageAccounts",
             "name": "[variables('storageAccountName')]",
             "apiVersion": "2021-02-01",
