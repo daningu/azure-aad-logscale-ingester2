@@ -190,10 +190,10 @@
             "tags": "[if(contains(parameters('tagsByResource'), 'Microsoft.Storage/storageAccounts'), parameters('tagsByResource')['Microsoft.Storage/storageAccounts'], json('{}'))]",
             "kind": "Storage",
             "sku": {
-                "name": "[parameters('storageAccountType')]"
+                "name": "Standard_LRS"
             },
             "properties": {
-                "minimumTlsVersion": "[parameters('storageAccountTLS')]"
+                "minimumTlsVersion": "TLS1_2"
             }
         },
         {
