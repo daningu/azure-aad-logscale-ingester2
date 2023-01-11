@@ -182,6 +182,19 @@
 
     },
     "resources": [
+        {
+            "apiVersion": "2021-02-01",
+            "name": "[format('{0}/{1}', variables('functionAppName'), 'web')]",
+            "type": "Microsoft.Web/sites/sourcecontrols",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/Sites', variables('functionAppName'))]"
+            ],
+            "properties": {
+                "RepoUrl": "[parameters('githubRepoURL')]",
+                "branch": "[parameters('githubRepoBranch')]",
+               "IsManualIntegration": true
+            }
+        },
        {
             "type": "Microsoft.Storage/storageAccounts",
             "name": "[variables('storageAccountName')]",
@@ -211,7 +224,7 @@
                 "computeMode": "Dynamic",
                 "reserved": true
             }
-    },
+        },
         {
             "apiVersion": "2020-02-02",
             "name": "[variables('functionAppName')]",
@@ -372,21 +385,6 @@
                     ]
                 }
             },
-            "resources": [
-                {
-                    "apiVersion": "2021-02-01",
-                    "name": "[format('{0}/{1}', variables('functionAppName'), 'web')]",
-                    "type": "Microsoft.Web/sites/sourcecontrols",
-                    "dependsOn": [
-                        "[resourceId('Microsoft.Web/Sites', variables('functionAppName'))]"
-                    ],
-                    "properties": {
-                        "RepoUrl": "[parameters('githubRepoURL')]",
-                        "branch": "[parameters('githubRepoBranch')]",
-                        "IsManualIntegration": true
-                    }
-                }
-            ] 
         }
     ]
 }
