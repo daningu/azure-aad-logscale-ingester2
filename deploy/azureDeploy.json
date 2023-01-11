@@ -182,6 +182,20 @@
 
     },
     "resources": [
+       {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[variables('storageAccountName')]",
+            "apiVersion": "2021-02-01",
+            "location": "Central US",
+            "tags": "[if(contains(parameters('tagsByResource'), 'Microsoft.Storage/storageAccounts'), parameters('tagsByResource')['Microsoft.Storage/storageAccounts'], json('{}'))]",
+            "kind": "Storage",
+            "sku": {
+                "name": "[parameters('storageAccountType')]"
+            },
+            "properties": {
+                "minimumTlsVersion": "[parameters('storageAccountTLS')]"
+            }
+        },
         {
             "type": "Microsoft.Web/serverfarms",
             "apiVersion": "2022-03-01",
