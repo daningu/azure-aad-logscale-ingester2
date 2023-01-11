@@ -375,7 +375,7 @@
             "resources": [
                 {
                     "apiVersion": "2021-02-01",
-                    "name": "[format('{0}/{1}', parameters('functionAppName'), 'web')]",
+                    "name": "[format('{0}/{1}', variables('functionAppName'), 'web')]",
                     "type": "Microsoft.Web/sites/sourcecontrols",
                     "dependsOn": [
                         "[resourceId('Microsoft.Web/Sites', variables('functionAppName'))]"
