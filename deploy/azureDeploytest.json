@@ -179,8 +179,6 @@
     "variables": {
         "functionAppName": "[parameters('appName')]",
         "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'functions')]"
-
-    },
     },
     "resources": [
         {
