@@ -53,7 +53,7 @@
         },
         "LogScaleHECURL": {
             "type": "string",
-            "defaultValue": "https://cloud.community.humio.com/api/v1/ingest/hec/raw",
+            "defaultValue": "https://cloud.community.humio.com/api/v1/ingest/hec/raw"
             "metadata": {
                 "description": "LogScale HEC URL"
             }
