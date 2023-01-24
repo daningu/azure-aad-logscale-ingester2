@@ -2,10 +2,10 @@
 	"$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
 	"contentVersion": "1.0.0.0",
 	"parameters": {
-		"siteName": {
+		"appName": {
 			"type": "string",
 			"metadata": {
-				"description": "The name of the web app that you wish to create."
+				"description": "The name of the function app that you wish to create."
 			}
 		},
 "eventHubConnectionString": {
