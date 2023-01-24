@@ -53,6 +53,8 @@
         },
         "LogScaleHECURL": {
             "type": "string",
+            "defaultValue": "https://cloud.community.humio.com/api/v1/ingest/hec/raw"
+
             "metadata": {
                 "description": "LogScale HEC URL"
             }
@@ -65,7 +67,7 @@
         },
         "githubRepoURL": {
             "type": "string",
-            "defaultValue": "https://github.com/daningu/humio-test.git"
+            "defaultValue": "https://github.com/daningu/azure-aad-logscale-ingester2.git"
         },
         "githubRepoBranch": {
             "type": "string",
